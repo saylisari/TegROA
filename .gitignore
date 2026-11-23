@@ -1,0 +1,42 @@
+# Secrets and environment files
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# Python
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+*.egg-info/
+
+# Node.js and Tauri
+node_modules/
+dist/
+target/
+
+# Runtime data
+runtime/
+*.log
+*.checkpoint
+*.sqlite
+*.sqlite3
+*.db
+
+# Network captures and datasets
+*.pcap
+*.pcapng
+*.csv
+
+# Temporary and backup files
+*.bak
+*.backup
+*.before_*
+*~
+.DS_Store
+
+# Generated packages
+*.deb

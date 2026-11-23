@@ -1,0 +1,234 @@
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: Inter, Arial, sans-serif;
+  background: #0b1120;
+  color: #e8edf7;
+}
+
+button {
+  background: #1d3557;
+  border: 1px solid #355078;
+  border-radius: 8px;
+  padding: 11px 17px;
+  color: #e8edf7;
+  cursor: pointer;
+}
+
+button:hover { background: #29456d; }
+
+.app { display: flex; min-height: 100vh; }
+
+.sidebar {
+  width: 245px;
+  flex-shrink: 0;
+  background: #0e1728;
+  border-right: 1px solid #233047;
+  padding: 27px 16px;
+  display: flex;
+  flex-direction: column;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 4px 10px 35px;
+}
+
+.brand-icon {
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  background: #164e63;
+  color: #67e8f9;
+  font-size: 24px;
+  font-weight: 800;
+}
+
+.brand h2 { margin: 0; font-size: 22px; }
+.brand span { font-size: 10px; color: #8193ad; letter-spacing: 1.5px; }
+
+nav { display: grid; gap: 9px; }
+
+.nav-item {
+  padding: 14px;
+  color: #9aaac1;
+  border-radius: 9px;
+  font-size: 14px;
+}
+
+.nav-item.active {
+  background: #16364a;
+  color: #67e8f9;
+  font-weight: 600;
+}
+
+.sidebar-footer {
+  margin-top: auto;
+  padding: 16px 12px;
+  border-top: 1px solid #233047;
+  color: #a8bad0;
+  font-size: 13px;
+}
+
+.sidebar-footer small {
+  display: block;
+  margin-top: 6px;
+  color: #64748b;
+}
+
+.content { flex: 1; min-width: 0; padding: 34px; }
+
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 30px;
+}
+
+.eyebrow {
+  color: #67e8f9;
+  font-size: 11px;
+  letter-spacing: 2px;
+  font-weight: 700;
+}
+
+h1 { margin: 10px 0 5px; font-size: 30px; }
+.topbar p, .panel-heading p { color: #8ea0ba; margin: 0; }
+
+.header-actions { display: flex; align-items: center; gap: 14px; }
+
+.status {
+  color: #4ade80;
+  font-size: 13px;
+  white-space: nowrap;
+}
+
+.status.offline { color: #fb7185; }
+
+.metrics {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.metric, .panel {
+  background: #121e30;
+  border: 1px solid #26364e;
+  border-radius: 12px;
+}
+
+.metric { padding: 23px; }
+
+.metric > span {
+  display: block;
+  color: #90a3bd;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.metric strong {
+  display: block;
+  font-size: 35px;
+  margin: 15px 0 8px;
+}
+
+.metric strong.database-status {
+  font-size: 23px;
+  color: #4ade80;
+}
+
+.metric small { color: #7286a3; }
+
+.panel { margin-bottom: 22px; overflow: hidden; }
+
+.panel-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 22px;
+  border-bottom: 1px solid #26364e;
+}
+
+.panel-heading h3 { margin: 0 0 7px; font-size: 17px; }
+
+.panel-count {
+  background: #1e3047;
+  color: #b4c8df;
+  border-radius: 20px;
+  padding: 7px 12px;
+  font-size: 12px;
+}
+
+.table-wrap { overflow-x: auto; }
+
+table { width: 100%; border-collapse: collapse; font-size: 13px; }
+
+th {
+  color: #7f94b0;
+  text-align: left;
+  font-size: 11px;
+  letter-spacing: 1px;
+  padding: 16px 20px;
+  background: #142237;
+}
+
+td {
+  padding: 15px 20px;
+  border-top: 1px solid #223149;
+  color: #d4deed;
+}
+
+.severity, .protocol {
+  display: inline-block;
+  padding: 5px 9px;
+  border-radius: 5px;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.severity.medium { background: #493b20; color: #fbbf24; }
+.severity.high, .severity.critical { background: #4b2530; color: #fb7185; }
+.severity.low { background: #173c35; color: #6ee7b7; }
+.protocol { background: #1c3854; color: #7dd3fc; }
+
+.error {
+  padding: 13px;
+  margin-bottom: 20px;
+  border: 1px solid #9f3348;
+  border-radius: 8px;
+  color: #fda4af;
+}
+
+footer {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  color: #64748b;
+  font-size: 11px;
+  letter-spacing: 1px;
+  padding: 10px 0;
+}
+
+@media (max-width: 1100px) {
+  .metrics { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (max-width: 720px) {
+  .app { flex-direction: column; }
+  .sidebar { width: 100%; padding: 15px; }
+  nav { display: none; }
+  .sidebar-footer { display: none; }
+  .brand { padding: 0; }
+  .content { padding: 20px; }
+  .topbar { align-items: flex-start; flex-direction: column; }
+  .metrics { grid-template-columns: 1fr; }
+}

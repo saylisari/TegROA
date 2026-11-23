@@ -1,0 +1,26 @@
+[Unit]
+Description=TegROA Continuous AI Network Monitoring
+After=network.target postgresql.service
+Requires=postgresql.service
+
+[Service]
+Type=simple
+User=sayli
+WorkingDirectory=/home/sayli/Projects/TegROA/backend
+EnvironmentFile=/home/sayli/Projects/TegROA/backend/.env
+ExecStart=/home/sayli/Projects/TegROA/backend/.venv/bin/python -m app.ml.continuous_monitor
+Restart=no
+KillMode=mixed
+KillSignal=SIGINT
+TimeoutStopSec=30
+NoNewPrivileges=true
+CapabilityBoundingSet=CAP_NET_RAW CAP_NET_ADMIN
+AmbientCapabilities=CAP_NET_RAW CAP_NET_ADMIN
+ProtectSystem=strict
+ReadWritePaths=/home/sayli/Projects/TegROA/backend/runtime/ai/continuous
+ProtectHome=read-only
+PrivateTmp=true
+RestrictAddressFamilies=AF_UNIX AF_INET AF_INET6 AF_PACKET AF_NETLINK
+
+[Install]
+WantedBy=multi-user.target
