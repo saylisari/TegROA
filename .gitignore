@@ -1,42 +1,56 @@
-# Secrets and environment files
+# Environment and secrets
 .env
 .env.*
 !.env.example
-*.pem
-*.key
 
 # Python
-.venv/
-venv/
 __pycache__/
 *.py[cod]
+.venv/
+venv/
 .pytest_cache/
-*.egg-info/
+.mypy_cache/
 
-# Node.js and Tauri
-node_modules/
-dist/
-target/
-
-# Runtime data
-runtime/
-*.log
-*.checkpoint
+# Databases
+*.db
 *.sqlite
 *.sqlite3
-*.db
 
-# Network captures and datasets
-*.pcap
-*.pcapng
-*.csv
+# Runtime and generated data
+backend/runtime/
+*.log
+*.checkpoint
 
-# Temporary and backup files
+# ML artifacts
+*.joblib
+*.pkl
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Desktop generated dependencies and builds
+desktop/node_modules/
+desktop/src-tauri/target/
+desktop/dist/
+
+# Backup files
 *.bak
 *.backup
 *.before_*
-*~
-.DS_Store
 
-# Generated packages
-*.deb
+# Dataset and packet captures
+datasets/*.pcap
+datasets/*.csv
+lab/pcaps/*.pcap
+
+# Backend virtual environments and test cache
+backend/.pytest_cache/
+backend/.venv/
+
+# Additional security exclusions
+*.pem
+*.key
+*.pcapng
+*.pcap
+*.csv
