@@ -6,25 +6,26 @@ TegROA is a network security monitoring project developed for an Advanced Networ
 
 ## System Architecture
 
-Network Traffic / PCAP Files
-        |
-        v
-Python Traffic Capture and Import
-        |
-        +--> Network Events --> PostgreSQL
-        |
-        +--> Rule-Based Port-Scan Detection --> Security Alerts
-        |
-        +--> CICFlowMeter --> Random Forest Inference --> AI Predictions
-                                      |
-                                      v
-                              PostgreSQL Database
-                                      |
-                                      v
-                                FastAPI Backend
-                                      |
-                                      v
-                              React + Tauri Desktop
+
+```mermaid
+flowchart TD
+    A["Network Traffic / PCAP Files"] --> B["Scapy Traffic Collection"]
+    B --> C["Network Events"]
+    B --> D["Rule-Based Port-Scan Detection"]
+    B --> E["CICFlowMeter"]
+    E --> F["Feature Adapter"]
+    F --> G["Random Forest AI"]
+
+    C --> H[("PostgreSQL Database")]
+    D --> I["Security Alerts"]
+    I --> H
+    G --> J["AI Predictions"]
+    J --> H
+
+    H --> K["FastAPI REST API"]
+    K --> L["React + Tauri Desktop Dashboard"]
+```
+
 
 ## Project Structure
 
