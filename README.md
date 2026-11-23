@@ -1,87 +1,167 @@
-# TegROA — Intelligent Network Threat Detection and Security Monitoring System
+# TegROA
+### AI-Assisted Network Traffic Monitoring and Security Detection
 
-## Project Overview
+TegROA is a network security monitoring project combining live traffic
+capture, network event storage, rule-based security detection, and
+machine-learning-based traffic analysis.
 
-TegROA is a network security monitoring project developed for an Advanced Network Security course. It combines packet capture, network event storage, rule-based port-scan detection, machine-learning inference, and a desktop monitoring dashboard.
+## Features
 
-## System Architecture
+- Live TCP and UDP traffic monitoring using Scapy.
+- TCP port scan detection.
+- Network event and security alert storage.
+- AI-based network flow classification.
+- CICFlowMeter integration.
+- FastAPI monitoring backend.
+- PostgreSQL and SQLite database support.
+- React and Tauri desktop application.
+- Systemd-based continuous monitoring services.
 
+## Architecture
 
-```mermaid
-flowchart TD
-    A["Network Traffic / PCAP Files"] --> B["Scapy Traffic Collection"]
-    B --> C["Network Events"]
-    B --> D["Rule-Based Port-Scan Detection"]
-    B --> E["CICFlowMeter"]
-    E --> F["Feature Adapter"]
-    F --> G["Random Forest AI"]
+```text
+Network Interface
+       |
+       v
+Scapy Live Capture
+       |
+       v
+Network Events
+       |
+       +------> Live Port Scan Detector
+       |                  |
+       |                  v
+       |             Security Alerts
+       |
+       v
+CICFlowMeter
+       |
+       v
+Feature Adapter
+       |
+       v
+Machine Learning Inference
+       |
+       v
+AI Predictions
 
-    C --> H[("PostgreSQL Database")]
-    D --> I["Security Alerts"]
-    I --> H
-    G --> J["AI Predictions"]
-    J --> H
-
-    H --> K["FastAPI REST API"]
-    K --> L["React + Tauri Desktop Dashboard"]
+FastAPI Backend
+       |
+       v
+PostgreSQL / SQLite
+       |
+       v
+React + Tauri Desktop UI
 ```
 
+## Technology Stack
 
-## Project Structure
+- Python 3.14
+- FastAPI
+- SQLAlchemy
+- Scapy
+- CICFlowMeter
+- Random Forest
+- Pandas and Joblib
+- PostgreSQL / SQLite
+- React 19
+- Vite 8
+- Tauri 2
+- Rust
 
-- `backend/app/` — FastAPI application and security monitoring modules
-- `backend/app/database/` — Database connection and SQLAlchemy models
-- `backend/app/traffic/` — Live packet capture and PCAP import
-- `backend/app/detection/` — Port-scan detection logic
-- `backend/app/ml/` — Machine-learning inference and flow processing
-- `backend/deployment/` — Linux systemd service definitions
-- `backend/tests/` — Backend test cases
-- `desktop/src/` — React desktop dashboard
-- `desktop/src-tauri/` — Tauri desktop application
-- `docs/` — Project design documentation
-- `evidence/` — Testing evidence and screenshots
-- `lab/` — Network security laboratory materials
+## API Endpoints
 
+| Method | Endpoint | Description |
+|---|---|---|
+| GET | / | API information |
+| GET | /api/health | Health check |
+| POST | /api/events | Store network event |
+| GET | /api/events | List network events |
+| GET | /api/alerts | List security alerts |
+| GET | /api/stats | Monitoring statistics |
+| GET | /api/monitoring/status | Monitoring status |
+| POST | /api/monitoring/start | Start monitoring |
+| POST | /api/monitoring/stop | Stop monitoring |
+| GET | /api/ai/predictions | AI predictions |
 
+## Live Port Scan Detection
 
-## Documentation
+The rule-based detector monitors TCP SYN packets.
 
-- [System Architecture](docs/ARCHITECTURE.md)
-- [Installation Guide](docs/INSTALLATION.md)
-- [API Design](docs/API_DESIGN.md)
-- [Database Design](docs/DATABASE_DESIGN.md)
-- [Test Results](docs/TEST_RESULTS.md)
-- [CICFlowMeter Compatibility](docs/CICFLOWMETER_COMPATIBILITY.md)
-- [Python Dependencies](backend/requirements.txt)
+Default configuration:
+- Threshold: 5 distinct destination ports.
+- Detection window: 60 seconds.
+- Alert type: LIVE_PORT_SCAN.
+- Severity: medium.
 
-## Technologies
+## Laboratory Test Results
 
-Python, FastAPI, PostgreSQL, SQLAlchemy, Scapy, CICFlowMeter, scikit-learn, React, Tauri, Rust, and Linux systemd.
+A controlled test was performed:
 
-## Implemented Features
+- Source IP: 192.168.77.10
+- Destination IP: 192.168.77.20
+- Interface: eth1
+- Test: TCP port scan.
 
-- Import TCP and UDP network events from PCAP files
-- Capture live network traffic
-- Store network events in PostgreSQL
-- Detect suspicious TCP port-scanning behavior
-- Store and display security alerts
-- Perform Random Forest inference on network flow features
-- Store and display AI flow predictions
-- View monitoring statistics in a desktop dashboard
-- Run live monitoring components using Linux systemd services
+Verified database record:
 
-## Security and Privacy
+- Alert ID: 2509
+- Alert type: LIVE_PORT_SCAN
+- Severity: medium
+- Detection threshold: 5 distinct ports.
 
-Database credentials are provided through environment variables. Local environment files, virtual environments, runtime captures, and generated build artifacts are excluded from the public repository.
+The test confirms successful rule-based detection and database persistence.
 
-## Known Limitations
+## AI Classification Status
 
-- Machine-learning performance on a held-out dataset does not establish equivalent accuracy on real-world traffic.
-- Live AI-based detection of malicious port-scan flows requires further validation.
-- CICFlowMeter compatibility adjustments in the development environment require documentation for reproducible installation.
-- Desktop Start/Stop controls require additional integration testing across monitoring services.
-- The repository does not include the original large datasets or packet captures.
+The AI inference pipeline processed 859 network flows during testing.
+
+The inspected predictions were classified as BENIGN.
+
+Therefore, successful rule-based detection does not establish successful AI-based port scan classification. Further model validation is required.
+
+## Running the Backend
+
+```bash
+cd backend
+python -m venv .venv
+source .venv/bin/activate
+```
+```bash
+uvicorn app.main:app --host 127.0.0.1 --port 8000
+```
+
+API documentation: http://127.0.0.1:8000/docs
+
+## Running the Desktop Application
+
+```bash
+cd desktop
+npm install
+npm run dev
+```
+
+Build:
+
+```bash
+npm run build
+```
+
+## Running Tests
+
+```bash
+cd backend
+.venv/bin/python -m pytest
+```
+
+## Security
+
+Never commit credentials, .env files, local databases, virtual environments, private traffic captures, or generated build artifacts.
+
+See .gitignore for excluded files.
 
 ## Project Status
 
-Academic prototype under active development. The repository documents the implemented system, architecture, and source-code structure.
+Rule-based live port scan detection and database persistence have been demonstrated in a controlled laboratory environment.
+
+AI-based attack classification requires further validation.
