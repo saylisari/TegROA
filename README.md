@@ -42,6 +42,18 @@ flowchart TD
 - `evidence/` — Testing evidence and screenshots
 - `lab/` — Network security laboratory materials
 
+
+
+## Documentation
+
+- [System Architecture](docs/ARCHITECTURE.md)
+- [Installation Guide](docs/INSTALLATION.md)
+- [API Design](docs/API_DESIGN.md)
+- [Database Design](docs/DATABASE_DESIGN.md)
+- [Test Results](docs/TEST_RESULTS.md)
+- [CICFlowMeter Compatibility](docs/CICFLOWMETER_COMPATIBILITY.md)
+- [Python Dependencies](backend/requirements.txt)
+
 ## Technologies
 
 Python, FastAPI, PostgreSQL, SQLAlchemy, Scapy, CICFlowMeter, scikit-learn, React, Tauri, Rust, and Linux systemd.
